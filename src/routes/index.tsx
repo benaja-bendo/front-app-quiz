@@ -9,6 +9,9 @@ import {Login} from "@/pages/Login.tsx";
 import {Error404} from "@/pages/Error404.tsx";
 import {authenticateLoader} from "@/routes/loaders/authenticateLoader.ts";
 import {MainLayout} from "@/layout/MainLayout.tsx";
+import {loginAction} from "@/routes/actions/loginAction.ts";
+import {Register} from "@/pages/Register.tsx";
+import {RegisterAction} from "@/routes/actions/RegisterAction.ts";
 
 
 const routes: RouteObject[] = [
@@ -35,7 +38,13 @@ const routes: RouteObject[] = [
             {
                 path: "login",
                 Component: Login,
+                action: loginAction,
             },
+            {
+                path: 'register',
+                Component: Register,
+                action: RegisterAction,
+            }
         ]
     },
     {
