@@ -12,6 +12,8 @@ import {MainLayout} from "@/layout/MainLayout.tsx";
 import {loginAction} from "@/routes/actions/loginAction.ts";
 import {Register} from "@/pages/Register.tsx";
 import {RegisterAction} from "@/routes/actions/RegisterAction.ts";
+import {About} from "@/pages/About.tsx";
+import {Profile} from "@/pages/Profile.tsx";
 
 
 const routes: RouteObject[] = [
@@ -27,6 +29,14 @@ const routes: RouteObject[] = [
                 index: true,
                 path: "/",
                 Component: Home,
+            },
+            {
+                path: "/about",
+                Component: About,
+            },
+            {
+                path: "/profile",
+                Component: Profile,
             },
         ]
     },
