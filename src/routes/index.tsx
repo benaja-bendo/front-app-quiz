@@ -22,8 +22,8 @@ const routes: RouteObject[] = [
         path: "",
         loader: authenticateLoader,
         element: <MainLayout />,
-        hasErrorBoundary: true,
-        errorElement: <p>Error</p>,
+        // hasErrorBoundary: true,
+        // errorElement: <p>Error</p>,
         children: [
             {
                 index: true,
