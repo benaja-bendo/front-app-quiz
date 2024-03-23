@@ -12,6 +12,7 @@ import {MainLayout} from "@/layout/MainLayout.tsx";
 import {loginAction} from "@/routes/actions/loginAction.ts";
 import {Register} from "@/pages/Register.tsx";
 import {RegisterAction} from "@/routes/actions/RegisterAction.ts";
+import { Userprofile } from "@/pages/UserProfile";
 
 
 const routes: RouteObject[] = [
@@ -50,6 +51,10 @@ const routes: RouteObject[] = [
     {
         path: "*",
         Component: Error404,
+    },
+    {
+        path: "user-profile",
+        Component: Userprofile,
     }
 ];
 
