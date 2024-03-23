@@ -1,6 +1,7 @@
 export interface Route {
     login: string;
     logout: string;
+    register: string;
     test: string;
     user: {
         profile: string;
@@ -20,6 +21,7 @@ export interface Route {
 
 const configRoutes: Route = {
     login: import.meta.env.VITE_API_ROUTE_LOGIN || 'auth/login',
+    register: import.meta.env.VITE_API_ROUTE_REGISTER || 'auth/register',
     logout: import.meta.env.VITE_API_ROUTE_LOGOUT || 'auth/logout',
     test: '/test',
     user: {

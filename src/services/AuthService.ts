@@ -7,7 +7,8 @@ import {ResponseApiType} from "@/types/ResponseApiType.ts";
 interface AuthServiceProps {
     isAuthenticated: boolean;
     user: object | UserType;
-    signin(email: string, password: string,school_name: string): Promise<void>;
+    signin(email: string, password: string): Promise<ResponseApiType<ResponseLoginActionType>>;
+    register(name: string,email: string, password: string): Promise<ResponseApiType<ResponseLoginActionType>>;
     signout(): Promise<void>;
 }
 
@@ -23,17 +24,34 @@ class AuthService implements AuthServiceProps {
         return null;
     }
 
-    async signin(email: string, password: string, school_name: string) {
+    async signin(email: string, password: string) {
         try {
-            const response = await HttpService.post<ResponseApiType<ResponseLoginActionType>>(config.api.routes.login, { email, password, school_name });
+            const response = await HttpService.post<ResponseApiType<ResponseLoginActionType>>(config.api.routes.login, { email, password });
             if (response.status === 200) {
-                const { token, user,tenant_id } = response.data.data;
+                const { token, user } = response.data.data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
-                localStorage.setItem('tenant_id', tenant_id || '');
             } else {
                 console.error('Authentication failed');
             }
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async register(name: string,email: string, password: string) {
+        try {
+            const response = await HttpService.post<ResponseApiType<ResponseLoginActionType>>(config.api.routes.register, { name, email, password });
+            if (response.status === 200) {
+                const { token, user } = response.data.data;
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(user));
+            } else {
+                console.error('Authentication failed');
+            }
+            return response.data;
         } catch (error) {
             console.error(error);
             throw error;
