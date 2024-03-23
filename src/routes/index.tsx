@@ -12,7 +12,8 @@ import {MainLayout} from "@/layout/MainLayout.tsx";
 import {loginAction} from "@/routes/actions/loginAction.ts";
 import {Register} from "@/pages/Register.tsx";
 import {RegisterAction} from "@/routes/actions/RegisterAction.ts";
-import { Userprofile } from "@/pages/UserProfile";
+import {About} from "@/pages/About.tsx";
+import {Profile} from "@/pages/Profile.tsx";
 
 
 const routes: RouteObject[] = [
@@ -21,14 +22,22 @@ const routes: RouteObject[] = [
         path: "",
         loader: authenticateLoader,
         element: <MainLayout />,
-        hasErrorBoundary: true,
-        errorElement: <p>Error</p>,
+        // hasErrorBoundary: true,
+        // errorElement: <p>Error</p>,
         children: [
             {
                 index: true,
                 path: "/",
                 Component: Home,
             },
+            {
+                path: "/about",
+                Component: About,
+            },
+            {
+                path: "/profile",
+                Component: Profile,
+            }
         ]
     },
     {
@@ -51,10 +60,6 @@ const routes: RouteObject[] = [
     {
         path: "*",
         Component: Error404,
-    },
-    {
-        path: "user-profile",
-        Component: Userprofile,
     }
 ];
 

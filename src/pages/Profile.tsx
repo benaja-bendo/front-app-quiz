@@ -2,7 +2,7 @@ import {FC} from "react";
 // import {useCurrentUser} from "@/hook/use-current-user.ts";
 // import {useFetcher} from "react-router-dom";
 
-export const Userprofile: FC = () => {
+export const Profile: FC = () => {
     // const fetcher = useFetcher();
     // const {currentUser} = useCurrentUser();
     return (
