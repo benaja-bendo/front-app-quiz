@@ -1,6 +1,10 @@
-import React from "react";
+import {FC} from "react";
+// import {useCurrentUser} from "@/hook/use-current-user.ts";
+// import {useFetcher} from "react-router-dom";
 
-export const Userprofile: React.FC = () => {
+export const Userprofile: FC = () => {
+    // const fetcher = useFetcher();
+    // const {currentUser} = useCurrentUser();
     return (
         <div className="h-full flex justify-center items-center" style={{ minHeight: "100vh" }}>
             <div className="" style={{ maxWidth: "80%", minWidth: "600px", width: "auto" }}>
@@ -12,7 +16,7 @@ export const Userprofile: React.FC = () => {
                                     <div className="md:flex">
                                         <img id="showImage" className="max-w-xs w-32 items-center border rounded-lg shadow-lg"
                                             src={"https://via.placeholder.com/150"}   alt=""/>
-                                            
+
                                     <span style={{ fontSize: "2em", fontWeight: "bold" }} className="border-1 rounded-r px-4 py-2 w-full">Med Bel</span>
                                     </div>
                                   
