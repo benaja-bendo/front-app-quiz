@@ -1,35 +1,41 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import {useLoaderData} from "react-router-dom";
 
 export const Quiz: React.FC = () => {
     const dataLoader = useLoaderData() as any[];
     const [currentQuestion, setCurrentQuestion] = useState(0);
+
     const handleNextQuestion = () => {
         if (currentQuestion < dataLoader.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
         } else {
-            setCurrentQuestion(0)
+            setCurrentQuestion(0);
+            // Consider adding logic to display a completion message or redirect to a different screen
         }
-    }
+    };
+
     return (
         <>
-            <div className="container mx-auto p-4 overflow-y-auto">
-                <h2 className="text-2xl font-semibold">{dataLoader[currentQuestion].title}</h2>
-                <p>{dataLoader[currentQuestion].question}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
+            <div className="quiz-container">
+                <h2 className="quiz-title">{dataLoader[currentQuestion].title}</h2>
+                <p className="quiz-question">{dataLoader[currentQuestion].question}</p>
+
+                <div className="quiz-options">
                     {dataLoader[currentQuestion].options.map((option, index) => (
-                        <div key={index} className="p-4 border-2 border-gray-200 rounded-lg">
+                        <button
+                            key={index}
+                            className="quiz-option-button"
+                            // Add onClick handler for selecting options if needed
+                        >
                             {option}
-                        </div>
+                        </button>
                     ))}
                 </div>
-                <button
-                    className="mt-4 p-2 bg-blue-500 text-white rounded-lg"
-                    onClick={handleNextQuestion}
-                >
-                    Question suivante
+
+                <button className="quiz-next-button" onClick={handleNextQuestion}>
+                    {currentQuestion < dataLoader.length - 1 ? 'Question suivante' : 'Terminer'}
                 </button>
             </div>
         </>
     );
-}
+};
