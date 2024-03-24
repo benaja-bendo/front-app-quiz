@@ -26,7 +26,7 @@ export const Home: React.FC = () => {
                            className="border-2 border-gray-200 p-2 rounded-lg"/>
                 </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
                 <CardQuiz title="Quiz 1" description="Description 1"/>
                 <CardQuiz title="Quiz 2" description="Description 2"/>
                 <CardQuiz title="Quiz 3" description="Description 3"/>
