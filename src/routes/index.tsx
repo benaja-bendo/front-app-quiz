@@ -37,7 +37,7 @@ const routes: RouteObject[] = [
             {
                 path: "/profile",
                 Component: Profile,
-            },
+            }
         ]
     },
     {
