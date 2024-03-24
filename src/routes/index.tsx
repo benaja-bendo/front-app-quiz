@@ -60,7 +60,6 @@ const routes: RouteObject[] = [
                     ];
                 }
             },
-        ]
     },
     {
         path: "/auth",
