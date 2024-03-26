@@ -2,8 +2,10 @@ import React from "react";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Badge} from "@/components/ui/badge"
 import {Button} from "@/components/ui/button.tsx";
+import {Link} from "react-router-dom";
 
 interface IQuiz {
+    id?: number;
     title: string;
     description: string;
 }
@@ -26,11 +28,9 @@ export const CardQuiz: React.FC<IQuiz> = (quiz) => {
             <CardFooter>
                 <Button
                     className={"w-full"}
-                    onClick={() => {
-                        console.log("Commencer le quiz")
-                    }}
+                    asChild={true}
                     variant="secondary">
-                    Commencer
+                    <Link to={`/quiz/${quiz.id}`}>Commencer le quiz</Link>
                 </Button>
             </CardFooter>
         </Card>

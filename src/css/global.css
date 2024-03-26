@@ -74,3 +74,76 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Couleurs principales */
+:root {
+    --couleur-primaire: #2196f3;
+    --couleur-secondaire: #f4f4f4;
+    --couleur-texte: #333;
+    --couleur-gris-clair: #ddd;
+}
+
+/* Quiz container */
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--couleur-secondaire);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre du quiz */
+.quiz-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--couleur-texte);
+}
+
+/* Question du quiz */
+.quiz-question {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--couleur-texte);
+}
+
+/* Options du quiz */
+.quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+/* Bouton d'option */
+.quiz-option-button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: 1px solid var(--couleur-gris-clair);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.quiz-option-button:hover {
+    background-color: var(--couleur-gris-clair);
+}
+/* Bouton "Question suivante" */
+.quiz-next-button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: var(--couleur-primaire);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.quiz-next-button:hover {
+    background-color: #1976d2;
+}
+
