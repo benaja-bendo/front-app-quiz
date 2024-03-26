@@ -59,7 +59,8 @@ const routes: RouteObject[] = [
                         // Ajoutez plus de questions de quiz ici
                     ];
                 }
-            },
+            }
+        ]
     },
     {
         path: "/auth",
