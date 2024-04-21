@@ -24,7 +24,7 @@ export const Register: React.FC = () => {
     }
 
     const redirect = async () => {
-        await handleRegister("http://127.0.0.1:8000/api/auth/register", {name, email, password}) 
+        await handleRegister("http://127.0.0.1:8000/api/v1/auth/register", {name, email, password}) 
         navigate("/quiz/:id")
     }
 

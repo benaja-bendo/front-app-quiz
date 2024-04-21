@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
             body: JSON.stringify({data})
         });
 
-        if (!response.ok) throw new Error('La connexion au serveur a échouée, veuillez  réessayer plus tard');
+        if (!response.ok) throw new Error('Login failed');
         
         return response.json();
     }
@@ -41,7 +41,7 @@ export const Login: React.FC = () => {
                 <Button
                     className={"w-full"}
                     type="submit"
-                    onClick={()=>handleLogin("http://127.0.0.1:8000/api/auth/login", {email, password})}>Submit</Button>
+                    onClick={()=>handleLogin("http://127.0.0.1:8000/api/v1/auth/login", {email, password})}>Submit</Button>
                 <hr />
                 <Button
                     className={"w-full bg-blue-500 text-white"}
