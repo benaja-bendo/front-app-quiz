@@ -1,4 +1,4 @@
-import React from "react";
+
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Badge} from "@/components/ui/badge"
 import {Button} from "@/components/ui/button.tsx";
@@ -11,7 +11,10 @@ interface IQuiz {
 }
 
 export const CardQuiz: React.FC<IQuiz> = (quiz) => {
-    return (
+    
+    
+    
+    return(
         <Card>
             <CardHeader>
                 <CardTitle>{quiz.title}</CardTitle>

@@ -5,9 +5,24 @@ import {Form} from "react-router-dom";
 export const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    async function handleLogin(url = "", data = {}) {
+        
+        const response = await fetch(url, {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({data})
+        });
+
+        if (!response.ok) throw new Error('La connexion au serveur a échouée, veuillez  réessayer plus tard');
+        
+        return response.json();
+    }
     return (
         <div className={"w-full max-w-xs mx-auto h-screen grid place-content-center"}>
-            <Form action={'/auth/login'} method="post" replace className={"grid gap-4"}>
+            <Form replace className={"grid gap-4"}>
                 <h1 className={"text-2xl font-bold"}>Login</h1>
                 <label className={"grid gap-1"}>
                     Email:
@@ -25,7 +40,8 @@ export const Login: React.FC = () => {
                 </label>
                 <Button
                     className={"w-full"}
-                    type="submit">Submit</Button>
+                    type="submit"
+                    onClick={()=>handleLogin("http://127.0.0.1:8000/api/auth/login", {email, password})}>Submit</Button>
                 <hr />
                 <Button
                     className={"w-full bg-blue-500 text-white"}

@@ -68,12 +68,12 @@ const routes: RouteObject[] = [
     loader: GuestLoader,
     children: [
       {
-        path: "login",
+        path: "/login",
         Component: Login,
         action: loginAction,
       },
       {
-        path: "register",
+        path: "/register",
         Component: Register,
         action: RegisterAction,
       },
