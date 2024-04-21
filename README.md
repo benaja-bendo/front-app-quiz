@@ -1,10 +1,10 @@
 # App Quiz
 
-Description
+## Description
 
 QuizAI est une application de quiz qui permet aux utilisateurs de jouer à des quiz générés par une intelligence artificielle. Les utilisateurs peuvent également créer leurs propres quiz pour que d'autres puissent y jouer.
 
-Installation
+## Installation
 
 Pour utiliser l'application, suivez ces étapes :
 
@@ -23,7 +23,7 @@ npm install
 Utilisation
 Une fois installé, vous pouvez utiliser l'application en suivant ces étapes :
 
-Lancez l'application en exécutant la commande suivante :
+## Lancez l'application en exécutant la commande suivante :
 
 sql
 Copy code
