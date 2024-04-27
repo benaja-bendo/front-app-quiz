@@ -62,14 +62,11 @@ export const Home: React.FC = () => {
                                         />
                                     </div>
                                     <div>
-                                        <Label htmlFor="level" className="sr-only">
-                                            level
-                                        </Label>
-                                        <Input
-                                            id="level"
-                                            defaultValue="beginner"
-                                            readOnly
-                                        />
+                                        <select className="block w-full px-4 py-2 border">
+                                            <option>facile</option>
+                                            <option>moyen</option>
+                                            <option>difficile</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +84,7 @@ export const Home: React.FC = () => {
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
-                    <Dialog>
+                    {/* <Dialog>
                         <DialogTrigger asChild>
                             <Button variant="secondary">Personnalisé son Quiz</Button>
                         </DialogTrigger>
@@ -134,7 +131,7 @@ export const Home: React.FC = () => {
                                 </DialogClose>
                             </DialogFooter>
                         </DialogContent>
-                    </Dialog>
+                    </Dialog> */}
                 </div>
             </div>
         </div>
