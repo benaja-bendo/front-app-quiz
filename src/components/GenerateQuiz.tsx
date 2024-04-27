@@ -9,7 +9,7 @@ export const GenerateQuiz: React.FC = () => {
 
     const handleCreateQuiz = async () => {
         try {
-            const response = await fetch('/api/quiz', {
+            const response = await fetch('http://localhost:8000/api/generate-quiz', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
