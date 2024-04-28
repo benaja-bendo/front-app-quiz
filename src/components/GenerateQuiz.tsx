@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button.tsx";
 
 export const GenerateQuiz: React.FC = () => {
-    const [skill, setSkill] = useState("javascript"); // Valeur par défaut pour le skill
-    const [level, setLevel] = useState("facile"); // Valeur par défaut pour le niveau
+    const [skill, setSkill] = useState("javascript"); 
+    const [level, setLevel] = useState("facile"); 
 
     const handleCreateQuiz = async () => {
         try {
@@ -19,10 +19,10 @@ export const GenerateQuiz: React.FC = () => {
                     level: level
                 })
             });
-            // Gérer la réponse si nécessaire
+       
         } catch (error) {
             console.error('Error:', error);
-            // Gérer les erreurs ici
+            
         }
     };
 
