@@ -41,10 +41,10 @@ class AuthService implements AuthServiceProps {
         }
     }
 
-    async register(name: string,email: string, password: string) {
+    async register(name: string, email: string, password: string) {
         try {
             const response = await HttpService.post<ResponseApiType<ResponseLoginActionType>>(config.api.routes.register, { name, email, password });
-            if (response.status === 200) {
+            if (response.status === 201) {
                 const { token, user } = response.data.data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
