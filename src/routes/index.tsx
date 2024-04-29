@@ -11,7 +11,7 @@ import {authenticateLoader} from "@/routes/loaders/authenticateLoader.ts";
 import {MainLayout} from "@/layout/MainLayout.tsx";
 import {loginAction} from "@/routes/actions/loginAction.ts";
 import {Register} from "@/pages/Register.tsx";
-import {RegisterAction} from "@/routes/actions/RegisterAction.ts";
+import {registerAction} from "@/routes/actions/RegisterAction.ts";
 import {About} from "@/pages/About.tsx";
 import {Profile} from "@/pages/Profile.tsx";
 import {Quiz} from "@/pages/Quiz.tsx";
@@ -75,7 +75,7 @@ const routes: RouteObject[] = [
       {
         path: "register",
         Component: Register,
-        action: RegisterAction,
+        action: registerAction,
       },
     ],
   },
