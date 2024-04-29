@@ -1,14 +1,16 @@
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import QuizWiz from "@/components/img/quizWiz.svg";
 
 export const HeaderSite: React.FC = () => {
     return (<>
-        <header className="p-4 bg-blue-500 text-white mb-2">
+        <header className="p-4 mb-2">
             <div className="container mx-auto flex justify-between items-center ">
-                <a href="/" className="text-2xl">
+                <img src={QuizWiz} alt="Logo-app" style={{ width: "175px" }} />
+                {/*<a href="/" className="text-2xl">
                     App-Quiz
-                </a>
+                </a>*/}
                 <nav className="flex justify-between items-center w-1/5">
                     <ul className="flex gap-4 items-center justify-end w-full">
                         <li><Link to="/">Quizzes</Link></li>
@@ -16,7 +18,7 @@ export const HeaderSite: React.FC = () => {
                         <li>
                             <Link to="/profile">
                                 <Avatar>
-                                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn"/>
+                                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                                     <AvatarFallback>CN</AvatarFallback>
                                 </Avatar>
                             </Link>
