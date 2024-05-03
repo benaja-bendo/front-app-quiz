@@ -3,6 +3,7 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Badge} from "@/components/ui/badge"
 import {Button} from "@/components/ui/button.tsx";
 import {Link} from "react-router-dom";
+import "@/css/card-quiz.scss";
 
 interface IQuiz {
     id?: number;
@@ -14,7 +15,7 @@ export const CardQuiz: React.FC<IQuiz> = (quiz) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>{quiz.title}</CardTitle>
+                <CardTitle className={"pline"}>{quiz.title}</CardTitle>
                 <CardDescription>
                     <div className={"flex gap-1 mb-1"}>
                         <Badge variant="secondary">JS</Badge>
@@ -22,9 +23,7 @@ export const CardQuiz: React.FC<IQuiz> = (quiz) => {
                     </div>
                 </CardDescription>
             </CardHeader>
-            <CardContent>
-                <div>{quiz.description}</div>
-            </CardContent>
+            <CardContent>{quiz.description}</CardContent>
             <CardFooter>
                 <Button
                     className={"w-full"}

@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
-import {useLoaderData} from "react-router-dom";
+import React from 'react';
+// import {useLoaderData} from "react-router-dom";
 
 export const Quiz: React.FC = () => {
-    const dataLoader = useLoaderData() as any[];
-    const [currentQuestion, setCurrentQuestion] = useState(0);
+    // const dataLoader = useLoaderData() as any[];
+    // const [currentQuestion, setCurrentQuestion] = useState(0);
 
-    const handleNextQuestion = () => {
-        if (currentQuestion < dataLoader.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
-        } else {
-            setCurrentQuestion(0);
-            // Consider adding logic to display a completion message or redirect to a different screen
-        }
-    };
+    // const handleNextQuestion = () => {
+    //     if (currentQuestion < dataLoader.length - 1) {
+    //         setCurrentQuestion(currentQuestion + 1);
+    //     } else {
+    //         setCurrentQuestion(0);
+    //         // Consider adding logic to display a completion message or redirect to a different screen
+    //     }
+    // };
 
     return (
         <>
@@ -92,24 +92,6 @@ export const Quiz: React.FC = () => {
                                         <p className="ml-4">Code completion with instant preview</p>
                                     </li>
                                 </ul>
-                               {/* <div
-                                    className="flex justify-center items-center gap-2 text-base bg-slate-100 p-2 rounded-lg">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="32"
-                                        height="32"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <path
-                                            fill="currentColor"
-                                            d="M233.34 190.09L145.88 38.22a20.75 20.75 0 0 0-35.76 0L22.66 190.09a19.52 19.52 0 0 0 0 19.71A20.36 20.36 0 0 0 40.54 220h174.92a20.36 20.36 0 0 0 17.86-10.2a19.52 19.52 0 0 0 .02-19.71m-6.94 15.71a12.47 12.47 0 0 1-10.94 6.2H40.54a12.47 12.47 0 0 1-10.94-6.2a11.45 11.45 0 0 1 0-11.72l87.45-151.87a12.76 12.76 0 0 1 21.9 0l87.45 151.87a11.45 11.45 0 0 1 0 11.72M124 144v-40a4 4 0 0 1 8 0v40a4 4 0 0 1-8 0m12 36a8 8 0 1 1-8-8a8 8 0 0 1 8 8"
-                                        />
-                                    </svg>
-                                    <p className="leading-none">
-                                        Perfect for learning how the framework works, prototyping a
-                                        new idea
-                                    </p>
-                                </div>*/}
                             </div>
                             <div className="pt-8 text-base font-semibold leading-7">
                                 <p className="flex justify-between items-center">

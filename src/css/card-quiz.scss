@@ -1,0 +1,9 @@
+.pline{
+    -webkit-line-clamp: 2; /* Afficher 3 lignes maximum */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+*{
+    scroll-behavior: smooth;
+}
