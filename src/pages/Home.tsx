@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button.tsx";
-import { CardQuiz } from "@/components/CardQuiz.tsx";
+import React from "react";
+import {Button} from "@/components/ui/button.tsx";
+import {CardQuiz} from "@/components/CardQuiz.tsx";
 // import { CopyIcon } from "@radix-ui/react-icons"
 import {
     Dialog,
@@ -14,110 +14,26 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import "@/pages/Home.scss"
-import Search from "@/components/img/search.svg";
-import Photo from "@/components/img/photo-présentation.svg";
-import Rod from "@/components/img/rod.svg"
 
 
 export const Home: React.FC = () => {
-
-    const filters = ["Facile", "Moyen", "Difficile"];
-    const filters2 = [
-        "Tous les quiz (156)",
-        "Monuments célèbres",
-        "Animaux du monde",
-        "Jeux olympiques",
-        "7 merveilles du monde",
-        "Voitures",
-        "Capitales mondiales",
-        ">"
-    ];
-
-    const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
-    const [selectedFilter2, setSelectedFilter2] = useState<string | null>(null);
-
-    const handleClick = (index: number) => {
-        setSelectedFilter(String(index));
-    };
-
-    const handleClick2 = (index: number) => {
-        setSelectedFilter2(String(index));
-    };
-
     return (<>
-        <div>
-            <div className="header">
-                <div className="desktop-only">
-                    <img src={Photo} alt="Logo-app" />
-                </div>
-                <div className="right">
-                    <strong className="title-header">Découvrez votre&nbsp;<span className="purple">quiz idéal</span></strong>
-                    <div className="all-filters">
-                    {filters.map((filter, index) => (
-                            <button
-                                key={index}
-                                className={`filters ${selectedFilter === String(index) ? "selected" : ""}`}
-                                onClick={() => handleClick(index)}
-                            >
-                                {filter}
-                            </button>
-                        ))}
-                        {/*<button
-                            className={`filters ${selectedFilter === "Facile" ? "selected" : ""}`}
-                            onClick={() => handleClick("Facile")}
-                        >
-                            Facile
-                        </button>
-                        <button
-                            className={`filters ${selectedFilter === "Moyen" ? "selected" : ""}`}
-                            onClick={() => handleClick("Moyen")}
-                        >
-                            Moyen
-                        </button>
-                        <button
-                            className={`filters ${selectedFilter === "Difficile" ? "selected" : ""}`}
-                            onClick={() => handleClick("Difficile")}
-                        >
-                            Difficile
-                         </button>*/}
-                    </div>
-                    <div className="search-container">
-                        <input type="text" placeholder="Rechercher..." className="search-input" />
-                        <button className="search-button">
-                            <img src={Search} alt="search" />
-                        </button>
-                    </div>
-
+        <div className="container mx-auto p-4 overflow-y-auto">
+            <div className="flex justify-between items-center mb-4 border-b-2 border-black p-4">
+                <h2 className="text-2xl font-semibold">Les Quizzes</h2>
+                <div>
+                    <input type="text" placeholder="Rechercher un quiz"
+                           className="border-2 border-gray-200 p-2 rounded-lg"/>
                 </div>
             </div>
-            <div className="body">
-                <div className="items-center mb-4">
-                    <div className="jsp">
-                        <h2 className="text-2xl font-semibold">Quiz en vedettes</h2>
-                        <img src={Rod} alt="rod" style={{ margin: "30px 30px 30px 30px" }} />
-                        <div className="all-filters">
-                        {filters2.map((filter2, index) => (
-                                <button
-                                    key={index}
-                                    className={`filters ${selectedFilter2 === String(index) ? "selected" : ""}`}
-                                    onClick={() => handleClick2(index)}
-                                >
-                                    {filter2}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
-                    <CardQuiz title="Quiz 1" description="Description 1" />
-                    <CardQuiz title="Quiz 2" description="Description 2" />
-                    <CardQuiz title="Quiz 3" description="Description 3" />
-                    <CardQuiz title="Quiz 4" description="Description 4" />
-                    <CardQuiz title="Quiz 5" description="Description 5" />
-                    <CardQuiz title="Quiz 6" description="Description 6" />
-                    <CardQuiz title="Quiz 7" description="Description 7" />
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
+                <CardQuiz title="Quiz 1" description="Description 1"/>
+                <CardQuiz title="Quiz 2" description="Description 2"/>
+                <CardQuiz title="Quiz 3" description="Description 3"/>
+                <CardQuiz title="Quiz 4" description="Description 4"/>
+                <CardQuiz title="Quiz 5" description="Description 5"/>
+                <CardQuiz title="Quiz 6" description="Description 6"/>
+                <CardQuiz title="Quiz 7" description="Description 7"/>
             </div>
         </div>
         <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-2xl">
@@ -195,7 +111,7 @@ export const Home: React.FC = () => {
                                     </div>
                                     <div>
                                         <Label htmlFor="level" className="sr-only">
-                                            level
+                                           level
                                         </Label>
                                         <Input
                                             id="level"
