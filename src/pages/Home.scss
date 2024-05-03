@@ -67,7 +67,6 @@
     border-radius: 50px;
 }
 
-/* Style de l'input de recherche */
 .search-input {
     font-size: 16px;
     border-radius: 4px;
@@ -75,7 +74,6 @@
     margin: 15px;
 }
 
-/* Style du bouton de recherche */
 .search-button {
     width: 75px;
     padding: 8px 16px;
@@ -96,18 +94,7 @@
     justify-content: center;
 }
 
-.jsp {
+.quiz {
     display: grid;
     justify-items: center;
 }
-
-.jsp2 {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-/* Style au survol du bouton de recherche */
-//.search-button:hover {
-//background-color: #0056b3;
-//}
