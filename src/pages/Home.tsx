@@ -213,7 +213,7 @@ export const Home: React.FC = () => {
                                     </div>
                                     <div>
                                         <Label htmlFor="level" className="sr-only">
-                                            level
+                                           level
                                         </Label>
                                         <Input
                                             id="level"
