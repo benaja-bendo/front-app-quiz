@@ -1,5 +1,7 @@
 import {
     createBrowserRouter,
+    json,
+    redirect,
     RouteObject,
 } from "react-router-dom";
 import {Home} from "@/pages/Home.tsx";
@@ -15,6 +17,10 @@ import {registerAction} from "@/routes/actions/RegisterAction.ts";
 import {About} from "@/pages/About.tsx";
 import {Profile} from "@/pages/Profile.tsx";
 import {Quiz} from "@/pages/Quiz.tsx";
+import { AxiosError } from "axios";
+import {ResponseThrow} from "@/types/ResponseThrow.ts";
+import AuthService from "@/services/AuthService";
+
 
 
 const routes: RouteObject[] = [
@@ -77,6 +83,20 @@ const routes: RouteObject[] = [
         Component: Register,
         action: registerAction,
       },
+      {
+        path: "logout",
+        action: async () => {
+            try {
+                await AuthService.signout();
+                return redirect('/');
+            } catch (error) {
+                const err = error as AxiosError;
+                throw json<ResponseThrow>({
+                    message: err.message,
+                }, 401);
+            }
+        }
+    },
     ],
   },
   {
