@@ -19,7 +19,7 @@ import configRoutes from '@/utils/config-routes';
 export const GenerateQuiz: FC = () => {
     const { currentUser } = useCurrentUser();
     const data = useActionData() as { status?: number };
-    if (data?.status !== undefined) return <Navigate to={'/about'} />;
+    if (data?.status !== undefined) return <Navigate to={'/'} />;
 
     return (
         <Dialog>
@@ -44,7 +44,7 @@ export const GenerateQuiz: FC = () => {
                                     <option value="facile">facile</option>
                                     <option value="moyen">moyen</option>
                                     <option value="difficile">difficile</option>
-                                </select>
+                                </select><br></br>
                             </div>
                         </div>
                     </div>

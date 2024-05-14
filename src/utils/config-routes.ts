@@ -5,12 +5,6 @@ export interface Route {
     quizzes: {
         getAll: string;
         create: string;
-        show: (id: number) => string;
-        me: (id: number) => string;
-        delete: (id: number) => string;
-    };
-    demand: {
-        create: (id: number) => string;
     };
 }
 
@@ -19,15 +13,9 @@ const configRoutes: Route = {
     logout: import.meta.env.VITE_API_ROUTE_LOGOUT || '/logout',
     register: import.meta.env.VITE_API_ROUTE_REGISTER || '/register',
     quizzes: {
-        getAll: import.meta.env.VITE_API_ROUTE_PLANTS_GET_ALL || '/quizzes',
-        create: import.meta.env.VITE_API_ROUTE_PLANTS_CREATE || '/quizzes',
-        show: (id: number) => `/quizzes/${id}`,
-        me: (id: number) => `/quizzes/me/${id}`,
-        delete: (id: number) => `/quizzes/${id}`,
-    },
-    demand: {
-        create: (id: number) => `/quizzes/${id}/demands`,
-    },
+        getAll: import.meta.env.VITE_API_ROUTE_QUIZZES_GET_ALL || '/quizzes',
+        create: import.meta.env.VITE_API_ROUTE_QUIZZES_CREATE || '/quizzes',
+},
 };
 
 export default configRoutes;

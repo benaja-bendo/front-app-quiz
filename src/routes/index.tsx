@@ -20,7 +20,7 @@ import {Quiz} from "@/pages/Quiz.tsx";
 import { AxiosError } from "axios";
 import {ResponseThrow} from "@/types/ResponseThrow.ts";
 import AuthService from "@/services/AuthService";
-import { GenerateQuiz } from "@/pages/GenerateQuiz";
+import { QuizStart } from "@/pages/QuizStart.tsx";
 
 
 
@@ -47,8 +47,8 @@ const routes: RouteObject[] = [
         Component: Profile,
       },
       {
-        path: "/generate-quiz",
-        Component: GenerateQuiz,
+        path: "/start",
+        Component: QuizStart,
       },
       {
         path: "/quiz/:id",
