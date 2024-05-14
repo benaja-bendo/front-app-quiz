@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CardQuiz } from "@/components/CardQuiz.tsx";
 import { ArticlesQuiz } from "@/components/ArticlesQuiz.tsx";
-import { GenerateQuiz } from "@/components/GenerateQuiz.tsx";
+import { GenerateQuiz } from "@/pages/GenerateQuiz";
 
 // import { CopyIcon } from "@radix-ui/react-icons"
 
