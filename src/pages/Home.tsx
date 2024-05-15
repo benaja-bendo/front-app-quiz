@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CardQuiz } from "@/components/CardQuiz.tsx";
 import { ArticlesQuiz } from "@/components/ArticlesQuiz.tsx";
-import { GenerateQuiz } from "@/pages/GenerateQuiz";
+import { Button } from '@/components/ui/button';
+import {Link} from "react-router-dom";
+
+
 
 // import { CopyIcon } from "@radix-ui/react-icons"
 
@@ -131,7 +134,9 @@ export const Home: React.FC = () => {
         <div className="fixed bottom-0 left-0 right-0 bg-white p-5 shadow-2xl">
             <div className="container mx-auto p-4">
                 <div className="flex gap-2 justify-end items-center">
-                  <GenerateQuiz/>
+                    <Link to="/generate-quiz">
+                        <Button variant="secondary">Générer un Quiz</Button>
+                    </Link>
                 </div>
             </div>
         </div>
