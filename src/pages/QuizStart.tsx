@@ -14,7 +14,7 @@ export const QuizStart: FC = () => {
         // const res = await httpService.post(configRoutes.quizzes.getAll, { title, level });
         // console.log(res); 
         // const quizId = res.quizId; 
-        // exemple pour voir si le redirect marcher
+        // exemple pour voir si le redirect marcher ou pas
         const quizId = 123;
         
         window.location.href = `/quiz/${quizId}`;
