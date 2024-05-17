@@ -1,10 +1,10 @@
 import {FC} from "react";
-// import {useCurrentUser} from "@/hook/use-current-user.ts";
-// import {useFetcher} from "react-router-dom";
+import {useCurrentUser} from "@/hook/use-current-user.ts";
+import {useFetcher} from "react-router-dom";
 
 export const Profile: FC = () => {
-    // const fetcher = useFetcher();
-    // const {currentUser} = useCurrentUser();
+     const fetcher = useFetcher();
+     const {currentUser} = useCurrentUser();
     return (
         <div className="h-full flex justify-center items-center" style={{ minHeight: "100vh" }}>
             <div className="" style={{ maxWidth: "80%", minWidth: "600px", width: "auto" }}>
@@ -15,44 +15,36 @@ export const Profile: FC = () => {
 
                                     <div className="md:flex">
                                         <img id="showImage" className="max-w-xs w-32 items-center border rounded-lg shadow-lg"
-                                            src={"https://via.placeholder.com/150"}   alt=""/>
+                                             src={currentUser?.avatar || "https://via.placeholder.com/150"}
+                                             alt=""/>
 
-                                    <span style={{ fontSize: "2em", fontWeight: "bold" }} className="border-1 rounded-r px-4 py-2 w-full">Med Bel</span>
+                                    <span style={{ fontSize: "2em", fontWeight: "bold" }} className="border-1 rounded-r px-4 py-2 w-full">{currentUser?.name}</span>
                                     </div>
                                   
 
-                                   <button type="submit" style={{ background: "#007bff", marginBottom: "60px" }} className="-mt-2 text-md font-bold text-white rounded-full px-5 py-2 hover:bg-0056b3">
+                                    <fetcher.Form method="post" action={`/auth/logout`}>
+                                        <button type={"submit"} style={{background: "#5e86c5"}} className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
                                         Sign out
-                                    </button>
-
+                                        </button>
+                                    </fetcher.Form>
 
                                     <label htmlFor="name" className="font-semibold text-gray-700 block pb-1">Nom</label>
 
                                     <div className="flex">
-                                        <span className="border-1  rounded-r px-4 py-2 w-full">Bel</span>
-                                    </div>
-
-                                    <label htmlFor="name" className="font-semibold text-gray-700 block pb-1">Prénom</label>
-
-                                    <div className="flex">
-                                        <span className="border-1  rounded-r px-4 py-2 w-full">Med</span>
+                                        <span className="border-1  rounded-r px-4 py-2 w-full">{currentUser?.name}</span>
                                     </div>
 
                                     <label htmlFor="email" className="font-semibold text-gray-700 block pb-1">Email</label>
 
                                     <div className="flex">
-                                        <span className="border-1  rounded-r px-4 py-2 w-full">mourtadam21@gmail.com</span>
+                                        <span className="border-1  rounded-r px-4 py-2 w-full">{currentUser?.email}</span>
                                     </div>
 
                                     <label htmlFor="email" className="font-semibold text-gray-700 block pb-1">Score</label>
 
                                     <div className="flex">
-                                        <span className="border-1  rounded-r px-4 py-2 w-full">123</span>
-                                    </div>
-
-                                
-      
-                      
+                                        <span className="border-1  rounded-r px-4 py-2 w-full">{currentUser?.score}</span>
+                                    </div>              
 
                 </div>
 
