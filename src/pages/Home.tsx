@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
+import { CardQuiz } from "@/components/CardQuiz.tsx";
+import { ArticlesQuiz } from "@/components/ArticlesQuiz.tsx";
+// import { CopyIcon } from "@radix-ui/react-icons"
 import {
     Dialog,
     DialogClose,
@@ -16,7 +19,12 @@ import "@/pages/Home.scss"
 import Search from "@/components/img/search.svg";
 import Photo from "@/components/img/photo-présentation.svg";
 import Rod from "@/components/img/rod.svg"
-import {ListQuiz} from "@/components/quizzes/ListQuiz.tsx";
+import HttpService from "@/services/HttpService";
+
+type TQuiz = {
+    title: string;
+    level: string;
+}
 
 export const Home: React.FC = () => {
 
@@ -32,11 +40,38 @@ export const Home: React.FC = () => {
         ">"
     ];
 
+    const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
     const [selectedFilter2, setSelectedFilter2] = useState<string | null>(null);
+    const [data, setData] = useState({ hits: [] });
+
+    const handleClick = (index: number) => {
+        setSelectedFilter(String(index));
+    };
 
     const handleClick2 = (index: number) => {
         setSelectedFilter2(String(index));
     };
+
+    const [Quizzes, setQuizzes] = useState<TQuiz[]>([
+        {title: "Quiz 1", level: "Facile"},
+        {title: "Quiz 2", level: "Difficile"},
+        {title: "Quiz 3", level: "Moyen"},
+        {title: "Quiz 4", level: "Moyen"},
+        {title: "Quiz 5", level: "Facile"},
+        {title: "Quiz 6", level: "Difficile"},
+        {title: "Quiz 7", level: "Facile"},
+    
+    ])
+
+    useEffect(() => {
+        getQuizzes().then(r => r)
+    }, [])
+
+    const getQuizzes = async () => { 
+        const {data} = await HttpService.get<TQuiz[]>("/quizzes")
+        setQuizzes(data)
+    }
+
 
     return (<>
         <div>
@@ -48,13 +83,13 @@ export const Home: React.FC = () => {
                     <strong className="title-header">Découvrez votre&nbsp;<span className="purple">quiz idéal</span></strong>
                     <div className="all-filters">
                         {filters.map((filter, index) => (
-                            <a
-                                href={"#list-quiz"}
+                            <button
                                 key={index}
-                                className={`filters`}
+                                className={`filters ${selectedFilter === String(index) ? "selected" : ""}`}
+                                onClick={() => handleClick(index)}
                             >
                                 {filter}
-                            </a>
+                            </button>
                         ))}
                     </div>
                     <div className="search-container">
@@ -85,7 +120,22 @@ export const Home: React.FC = () => {
                     </div>
                 </div>
 
-                <ListQuiz />
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
+                    {Quizzes.map((quiz, index) => (
+                        <CardQuiz key={index} title={quiz.title} description={quiz.level}/>
+                    ))}
+                </div>
+            </div>
+            <div className="body">
+                <div className="items-center mb-4">
+                    <div className="quiz">
+                        <h2 className="text-2xl font-semibold">Important articles</h2>
+                        <img src={Rod} alt="rod" style={{ margin: "30px 30px 30px 30px" }} />
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
+                    <ArticlesQuiz title="Quiz 1" description="Description 1" />
+                </div>
             </div>
         </div>
         <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-2xl">
