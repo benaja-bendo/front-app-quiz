@@ -8,9 +8,6 @@ export const HeaderSite: React.FC = () => {
         <header className="p-4 mb-2">
             <div className="container mx-auto flex justify-between items-center ">
                 <img src={QuizWiz} alt="Logo-app" style={{ width: "175px" }} />
-                {/*<a href="/" className="text-2xl">
-                    App-Quiz
-                </a>*/}
                 <nav className="flex justify-between items-center w-1/5">
                     <ul className="flex gap-4 items-center justify-end w-full">
                         <li><Link to="/">Quizzes</Link></li>

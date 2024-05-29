@@ -1,41 +1,93 @@
-import React, { useState } from 'react';
-import {useLoaderData} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-export const Quiz: React.FC = () => {
-    const dataLoader = useLoaderData() as any[];
-    const [currentQuestion, setCurrentQuestion] = useState(0);
 
-    const handleNextQuestion = () => {
-        if (currentQuestion < dataLoader.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
-        } else {
-            setCurrentQuestion(0);
-            // Consider adding logic to display a completion message or redirect to a different screen
+const Quiz: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    const [quizzes, setQuizzes] = useState<any[]>([]);
+    const [quizData, setQuizData] = useState<any[]>([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [quizCompleted, setQuizCompleted] = useState<boolean>(false);
+
+    useEffect(() => {
+        const fetchQuizzes = async () => {
+            try {
+                const response = await axios.get('/api/v1/quizzes');
+                setQuizzes(response.data);
+            } catch (error) {
+                console.error('Error fetching quizzes:', error);
+            }
+        };
+
+        fetchQuizzes();
+    }, []);
+
+    useEffect(() => {
+        // Call your backend API to fetch quiz data
+        fetchQuizData();
+    }, []);
+
+    const fetchQuizData = async () => {
+        try {
+            const response = await fetch(`/api/v1/quizzes/${id}`);
+            const data = await response.json();
+            setQuizData(data);
+        } catch (error) {
+            console.error('Error fetching quiz data:', error);
         }
     };
+
+    const handleNextQuestion = () => {
+        if (currentQuestionIndex < quizData.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+            setSelectedOption(null); // Reset selected option for next question
+        } else {
+            setQuizCompleted(true);
+        }
+    };
+
+    const handleOptionSelect = (option: string) => {
+        setSelectedOption(option);
+    };
+
+    const currentQuestion = quizData[currentQuestionIndex];
+
+    if (quizData.length === 0) {
+        return <div>Loading...</div>;
+    }
+
+    if (quizCompleted) {
+        return <div>Congratulations! You have completed the quiz.</div>;
+    }
 
     return (
         <>
             <div className="quiz-container">
-                <h2 className="quiz-title">{dataLoader[currentQuestion].title}</h2>
-                <p className="quiz-question">{dataLoader[currentQuestion].question}</p>
+                <h2 className="quiz-title">{currentQuestion.title}</h2>
+                <p className="quiz-question">{currentQuestion.question}</p>
 
                 <div className="quiz-options">
-                    {dataLoader[currentQuestion].options.map((option, index) => (
-                        <button
-                            key={index}
-                            className="quiz-option-button"
-                            // Add onClick handler for selecting options if needed
-                        >
-                            {option}
-                        </button>
+                    {quizzes.map((quiz, index) => (
+                        <div key={index}>
+                            <h3>{quiz.title}</h3>
+                            <p>{quiz.question}</p>
+                            {/* Add logic to display options and handle user responses */}
+                        </div>
                     ))}
                 </div>
 
-                <button className="quiz-next-button" onClick={handleNextQuestion}>
-                    {currentQuestion < dataLoader.length - 1 ? 'Question suivante' : 'Terminer'}
+                <button
+                    className="quiz-next-button"
+                    onClick={handleNextQuestion}
+                    disabled={selectedOption === null} // Disable next button until an option is selected
+                >
+                    {currentQuestionIndex < quizData.length - 1 ? 'Next Question' : 'Finish'}
                 </button>
             </div>
         </>
     );
 };
+
+export default Quiz;

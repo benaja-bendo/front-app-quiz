@@ -14,7 +14,7 @@ import {Register} from "@/pages/Register.tsx";
 import {registerAction} from "@/routes/actions/RegisterAction.ts";
 import {About} from "@/pages/About.tsx";
 import {Profile} from "@/pages/Profile.tsx";
-import {Quiz} from "@/pages/Quiz.tsx";
+import Quiz from "@/pages/Quiz.tsx";
 
 
 const routes: RouteObject[] = [
