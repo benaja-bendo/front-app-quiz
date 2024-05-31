@@ -1,32 +1,31 @@
 import React from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button.tsx";
 import { Link } from "react-router-dom";
 
-interface IQuiz {
-    id?: number;
-    title: string;
-    description: string;
-}
 
-export const CardQuiz: React.FC<IQuiz> = (quiz) => {
+export const CardQuiz: React.FC = ({quiz}) => {    
     return (
         <Card>
             <CardHeader>
                 <CardTitle>{quiz.title}</CardTitle>
-                <div className={"flex gap-1 mb-1"}>
-                    <Badge variant="secondary">JS</Badge>
-                    <Badge variant="secondary">PHP</Badge>
-                </div>
+                <CardDescription>
+                    <div className={"flex gap-1 mb-1"}>
+                        <Badge variant="secondary">JS</Badge>
+                        <Badge variant="secondary">php</Badge>
+                    </div>
+                </CardDescription>
             </CardHeader>
             <CardContent>
                 <div>{quiz.description}</div>
             </CardContent>
             <CardFooter>
-                <Button className={"w-full"} asChild={true} variant="secondary">
-                    <Link to={`/quiz/${quiz.id}`}>Commencer le quiz</Link>
+                <Link to={`/quiz/${quiz?.id}`}>
+                <Button className={"w-full"} variant="secondary">
+                    Commencer le quiz
                 </Button>
+                </Link>
             </CardFooter>
         </Card>
     );

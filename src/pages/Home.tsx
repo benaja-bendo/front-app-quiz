@@ -11,20 +11,20 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import "@/pages/Home.scss"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import "@/pages/Home.scss";
 import Search from "@/components/img/search.svg";
 import Photo from "@/components/img/photo-présentation.svg";
-import Rod from "@/components/img/rod.svg"
+import Rod from "@/components/img/rod.svg";
 import HttpService from "@/services/HttpService";
 
 type TQuiz = {
     id: string;
     title: string;
     level: string;
-}
+};
 
 export const Home: React.FC = () => {
     const filters = ["Facile", "Moyen", "Difficile"];
@@ -42,6 +42,7 @@ export const Home: React.FC = () => {
     const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
     const [selectedFilter2, setSelectedFilter2] = useState<string | null>(null);
     const [quizzes, setQuizzes] = useState<TQuiz[]>([]);
+    const [generatedQuiz, setGeneratedQuiz] = useState<string | null>(null);
 
     useEffect(() => {
         getQuizzes();
@@ -56,6 +57,17 @@ export const Home: React.FC = () => {
         }
     };
 
+    const handleGenerateQuiz = async (skill: string, level: string) => {
+        try {
+            console.log(`Generating quiz for skill: ${skill}, level: ${level}`);
+            const response = await HttpService.get<{ message: string }>(`/generate-quiz?skill=${skill}&level=${level}`);
+            setGeneratedQuiz(response.data.message);
+            console.log("Generated quiz:", response.data.message);
+        } catch (error) {
+            console.error("Failed to generate quiz:", error);
+        }
+    };
+
     const handleClick = (index: number) => {
         setSelectedFilter(String(index));
     };
@@ -63,6 +75,7 @@ export const Home: React.FC = () => {
     const handleClick2 = (index: number) => {
         setSelectedFilter2(String(index));
     };
+
     return (
         <div>
             <div className="header">
@@ -109,11 +122,17 @@ export const Home: React.FC = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
-                    {quizzes.map((quiz) => (
-                        <CardQuiz key={quiz.id} title={quiz.title} description={quiz.level} />
+                    {quizzes.map((quiz,index) => (
+                        <CardQuiz key={index} quiz={quiz} />
                     ))}
                 </div>
             </div>
+            {generatedQuiz && (
+                <div className="generated-quiz">
+                    <h2>Quiz Généré</h2>
+                    <pre>{generatedQuiz}</pre>
+                </div>
+            )}
             {/* Votre code de pied de page */}
             <div className="body">
                 <div className="items-center mb-4">
@@ -131,13 +150,13 @@ export const Home: React.FC = () => {
                     <div className="flex gap-2 justify-end items-center">
                         <Dialog>
                             <DialogTrigger asChild>
-                                <Button variant="secondary">Généré son Quiz</Button>
+                                <Button variant="secondary">Générer un Quiz</Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-md">
                                 <DialogHeader>
-                                    <DialogTitle>Généré son Quiz</DialogTitle>
+                                    <DialogTitle>Générer un Quiz</DialogTitle>
                                     <DialogDescription>
-                                        Généré un quiz aléatoire pour vous ou pour vos amis
+                                        Générer un quiz aléatoire pour vous ou pour vos amis
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div className="flex items-center space-x-2">
@@ -166,8 +185,8 @@ export const Home: React.FC = () => {
                                 <DialogFooter className="sm:justify-start">
                                     <DialogClose asChild>
                                         <div className="flex gap-1">
-                                            <Button type="button" variant="secondary">
-                                                créer un quiz
+                                            <Button type="button" variant="secondary" onClick={() => handleGenerateQuiz('Politique', 'Moyen')}>
+                                                Créer un quiz
                                             </Button>
                                             <Button type="button" variant="destructive">
                                                 Annuler
@@ -179,11 +198,11 @@ export const Home: React.FC = () => {
                         </Dialog>
                         <Dialog>
                             <DialogTrigger asChild>
-                                <Button variant="secondary">Personnalisé son Quiz</Button>
+                                <Button variant="secondary">Personnaliser un Quiz</Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-md">
                                 <DialogHeader>
-                                    <DialogTitle>Personnaliser son Quiz</DialogTitle>
+                                    <DialogTitle>Personnaliser un Quiz</DialogTitle>
                                     <DialogDescription>
                                         Créer un quiz personnalisé pour vous ou pour vos amis
                                     </DialogDescription>
@@ -218,7 +237,7 @@ export const Home: React.FC = () => {
                                                 Annuler
                                             </Button>
                                             <Button type="button" variant="secondary">
-                                                suivant
+                                                Suivant
                                             </Button>
                                         </div>
                                     </DialogClose>

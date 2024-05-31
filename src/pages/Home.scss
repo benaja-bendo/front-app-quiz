@@ -47,12 +47,15 @@
     justify-content: center;
     gap: 20px;
     margin: 20px;
+    overflow-y: auto;
 }
 
 .filters {
     background: white;
     padding: 5px 10px;
     border-radius: 20px;
+    max-width: max-content;
+    width: max-content;
 }
 
 .selected {

@@ -42,23 +42,12 @@ const routes: RouteObject[] = [
       {
         path: "/quiz/:id",
         Component: Quiz,
-        loader: async () => {
-          return [
-            {
-              id: 1,
-              title: "Quiz 1",
-              question: "Quelle est la capitale de la France ?",
-              options: ["Paris", "Lyon", "Marseille", "Bordeaux"],
-            },
-            {
-              id: 2,
-              title: "Quiz 2",
-              question: "Quelle est la capitale de l'Espagne ?",
-              options: ["Madrid", "Barcelone", "Valence", "Séville"],
-            },
-            // Ajoutez plus de questions de quiz ici
-          ];
+        action:async ({ params, request }) => {
+          return params;
         },
+        loader:({ params }) => {
+          return params;
+        }
       },
     ],
   },
