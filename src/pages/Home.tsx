@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
 import { CardQuiz } from "@/components/CardQuiz.tsx";
-import { ArticlesQuiz } from "@/components/ArticlesQuiz.tsx";
 import {
     Dialog,
     DialogClose,
@@ -14,16 +13,12 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import "@/pages/Home.scss"
 import Search from "@/components/img/search.svg";
 import Photo from "@/components/img/photo-présentation.svg";
 import Rod from "@/components/img/rod.svg"
 import HttpService from "@/services/HttpService";
-
-type TQuiz = {
-    title: string;
-    level: string;
-}
+import {ResponseT, TQuiz} from "@/types/TQuiz.ts";
+import "@/pages/Home.scss"
 
 export const Home: React.FC = () => {
 
@@ -38,10 +33,9 @@ export const Home: React.FC = () => {
         "Capitales mondiales",
         ">"
     ];
-
     const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
     const [selectedFilter2, setSelectedFilter2] = useState<string | null>(null);
-    // const [data, setData] = useState({ hits: [] });
+
 
     const handleClick = (index: number) => {
         setSelectedFilter(String(index));
@@ -51,24 +45,16 @@ export const Home: React.FC = () => {
         setSelectedFilter2(String(index));
     };
 
-    const [Quizzes, setQuizzes] = useState<TQuiz[]>([
-        {title: "Quiz 1", level: "Facile"},
-        {title: "Quiz 2", level: "Difficile"},
-        {title: "Quiz 3", level: "Moyen"},
-        {title: "Quiz 4", level: "Moyen"},
-        {title: "Quiz 5", level: "Facile"},
-        {title: "Quiz 6", level: "Difficile"},
-        {title: "Quiz 7", level: "Facile"},
-    
-    ])
+    const [Quizzes, setQuizzes] = useState<TQuiz[]>([])
 
     useEffect(() => {
         getQuizzes().then(r => r)
     }, [])
 
+
     const getQuizzes = async () => { 
-        const {data} = await HttpService.get<TQuiz[]>("/quizzes")
-        setQuizzes(data)
+        const {data} = await HttpService.get<ResponseT<TQuiz[]>>("/quizzes")
+        setQuizzes(data.data)
     }
 
 
@@ -121,19 +107,8 @@ export const Home: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
                     {Quizzes.map((quiz, index) => (
-                        <CardQuiz key={index} title={quiz.title} description={quiz.level}/>
+                        <CardQuiz key={index} quiz={quiz}/>
                     ))}
-                </div>
-            </div>
-            <div className="body">
-                <div className="items-center mb-4">
-                    <div className="quiz">
-                        <h2 className="text-2xl font-semibold">Important articles</h2>
-                        <img src={Rod} alt="rod" style={{ margin: "30px 30px 30px 30px" }} />
-                    </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-24">
-                    <ArticlesQuiz title="Quiz 1" description="Description 1" />
                 </div>
             </div>
         </div>
