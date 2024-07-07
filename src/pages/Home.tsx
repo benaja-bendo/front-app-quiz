@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
 import { CardQuiz } from "@/components/CardQuiz.tsx";
 import { ArticlesQuiz } from "@/components/ArticlesQuiz.tsx";
-// import { CopyIcon } from "@radix-ui/react-icons"
 import {
     Dialog,
     DialogClose,
@@ -42,7 +41,7 @@ export const Home: React.FC = () => {
 
     const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
     const [selectedFilter2, setSelectedFilter2] = useState<string | null>(null);
-    const [data, setData] = useState({ hits: [] });
+    // const [data, setData] = useState({ hits: [] });
 
     const handleClick = (index: number) => {
         setSelectedFilter(String(index));

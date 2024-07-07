@@ -4,14 +4,12 @@ import {Badge} from "@/components/ui/badge"
 import {Button} from "@/components/ui/button.tsx";
 import {Link} from "react-router-dom";
 import "@/css/card-quiz.scss";
+import {TQuiz} from "@/types/TQuiz.ts";
 
-interface IQuiz {
-    id?: number;
-    title: string;
-    description: string;
-}
 
-export const CardQuiz: React.FC<IQuiz> = (quiz) => {
+export const CardQuiz: React.FC<{ quiz: TQuiz }> = (props) => {
+    console.log('props', props)
+    const {quiz} = props;
     return (
         <Card>
             <CardHeader>
@@ -29,7 +27,7 @@ export const CardQuiz: React.FC<IQuiz> = (quiz) => {
                     className={"w-full"}
                     asChild={true}
                     variant="secondary">
-                    <Link to={`/quiz/${quiz.id}`}>Commencer le quiz</Link>
+                    <Link to={`/quiz/${Number(quiz.id)}`}>Commencer le quiz</Link>
                 </Button>
             </CardFooter>
         </Card>
