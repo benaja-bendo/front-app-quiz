@@ -16,7 +16,7 @@ import {Register} from "@/pages/Register.tsx";
 import {registerAction} from "@/routes/actions/RegisterAction.ts";
 import {About} from "@/pages/About.tsx";
 import {Profile} from "@/pages/Profile.tsx";
-import {Quiz} from "@/pages/Quiz.tsx";
+import {loaderQuiz, Quiz} from "@/pages/Quiz.tsx";
 import { AxiosError } from "axios";
 import {ResponseThrow} from "@/types/ResponseThrow.ts";
 import AuthService from "@/services/AuthService";
@@ -58,23 +58,7 @@ const routes: RouteObject[] = [
       { 
         path: "/quiz/:id",
         Component: Quiz,
-        loader: async () => {
-          return [
-            {
-              id: 1,
-              title: "Quiz 1",
-              question: "Quelle est la capitale de la France ?",
-              options: ["Paris", "Lyon", "Marseille", "Bordeaux"],
-            },
-            {
-              id: 2,
-              title: "Quiz 2",
-              question: "Quelle est la capitale de l'Espagne ?",
-              options: ["Madrid", "Barcelone", "Valence", "Séville"],
-            },
-            // Ajoutez plus de questions de quiz ici
-          ];
-        },
+        loader: loaderQuiz,
       },
     ],
   },

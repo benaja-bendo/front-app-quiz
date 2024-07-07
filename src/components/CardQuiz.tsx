@@ -8,7 +8,6 @@ import {TQuiz} from "@/types/TQuiz.ts";
 
 
 export const CardQuiz: React.FC<{ quiz: TQuiz }> = (props) => {
-    console.log('props', props)
     const {quiz} = props;
     return (
         <Card>
