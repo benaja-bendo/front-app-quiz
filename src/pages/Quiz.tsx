@@ -4,9 +4,10 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import {LoaderFunctionArgs, useLoaderData} from "react-router-dom";
+import {LoaderFunctionArgs, useLoaderData, useNavigate} from "react-router-dom";
 import HttpService from "@/services/HttpService.ts";
 import {ResponseT, TQuiz} from "@/types/TQuiz.ts";
+import ConfettiExplosion from "react-confetti-explosion";
 
 export const loaderQuiz = async ({params}: LoaderFunctionArgs) => {
     const {id} = params;
@@ -30,10 +31,11 @@ export const loaderQuiz = async ({params}: LoaderFunctionArgs) => {
 
 export const Quiz: React.FC = () => {
     const quizData = useLoaderData() as TQuiz | undefined;
-    console.log('quizData', quizData)
+    const navigate = useNavigate();
     const [timeLeft, setTimeLeft] = useState(parseInt(quizData?.minutes || '0') * 60);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+    const [showConfetti, setShowConfetti] = useState(false);
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeLeft((prevTime) => prevTime - 1);
@@ -63,13 +65,21 @@ export const Quiz: React.FC = () => {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setSelectedAnswer(null);
         } else {
-            // Handle quiz completion (e.g., show results)
+            setShowConfetti(true);
+            // navigate(`/quiz/result`, {
+            //     state: {
+            //         // correctAnswers: quizData.questions.filter((question) => question.correctAnswer === question.id).length,
+            //         totalQuestions: quizData.questions.length,
+            //         timeTaken: parseInt(quizData.minutes) * 60 - timeLeft,
+            //     }
+            // })
         }
     };
 
     const currentQuestion = quizData.questions[currentQuestionIndex];
     return (
         <>
+            {showConfetti && <ConfettiExplosion />}
             <div
                 className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
                 <img
@@ -132,6 +142,9 @@ export const Quiz: React.FC = () => {
                                             <p>{currentQuestion.hint}</p>
                                         </PopoverContent>
                                     </Popover>
+                                    <p>
+                                        {currentQuestionIndex + 1} / {quizData.questions.length}
+                                    </p>
                                     <button
                                         onClick={handleNextQuestion}
                                         disabled={selectedAnswer === null}

@@ -117,7 +117,7 @@ export const Home: React.FC = () => {
         <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-2xl">
             <div className="container mx-auto p-4">
                 <div className="flex gap-2 justify-end items-center">
-                    <Link to={"/generate-quiz"}>
+                    <Link to={"/quiz/ia"}>
                         <Button variant="secondary">Généré son Quiz</Button>
                     </Link>
                     <Dialog>

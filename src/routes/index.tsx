@@ -22,6 +22,7 @@ import {ResponseThrow} from "@/types/ResponseThrow.ts";
 import AuthService from "@/services/AuthService";
 import { GenerateQuiz } from "@/pages/GenerateQuiz";
 import { QuizStart } from '@/pages/QuizStart';
+import {QuizResult} from "@/pages/QuizResult.tsx";
 
 
 
@@ -59,6 +60,10 @@ const routes: RouteObject[] = [
         path: "/quiz/:id",
         Component: Quiz,
         loader: loaderQuiz,
+      },
+      {
+        path: "/quiz/result",
+        Component: QuizResult,
       },
     ],
   },
