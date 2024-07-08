@@ -10,23 +10,30 @@ import {ResponseT, TQuiz} from "@/types/TQuiz.ts";
 
 export const loaderQuiz = async ({params}: LoaderFunctionArgs) => {
     const {id} = params;
-    const getQuizzes = async (): Promise<TQuiz> => {
-        if (!id) {
-            return {} as TQuiz
+    if (id === 'ia') {
+        const {data} = await HttpService.get<ResponseT<TQuiz | unknown>>(`/generate-quiz`)
+        let jsonString = data.data as string;
+        if (typeof data.data === 'string') {
+            // jsonString = jsonString.replace(/'/g, '"');
+            // jsonString = jsonString.replace(/\n/g, '');
+            jsonString = jsonString.replace(/\n/g, '');
+            return JSON.parse(jsonString) as TQuiz
         }
-        const {data} = await HttpService.get<ResponseT<TQuiz>>(`quizzes/${id}`)
         return data.data
     }
-    return getQuizzes();
-
+    if (!id || !/\d+/.test(id as string)) {
+        return {} as TQuiz
+    }
+    const {data} = await HttpService.get<ResponseT<TQuiz>>(`quizzes/${id}`)
+    return data.data
 }
 
 export const Quiz: React.FC = () => {
-    const quizData = useLoaderData() as TQuiz;
-    const [timeLeft, setTimeLeft] = useState(parseInt(quizData.minutes) * 60);
+    const quizData = useLoaderData() as TQuiz | undefined;
+    console.log('quizData', quizData)
+    const [timeLeft, setTimeLeft] = useState(parseInt(quizData?.minutes || '0') * 60);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeLeft((prevTime) => prevTime - 1);
@@ -34,7 +41,9 @@ export const Quiz: React.FC = () => {
 
         return () => clearInterval(interval);
     }, []);
-
+    if (!quizData || !quizData.questions) {
+        return <div>Quiz not found</div>
+    }
     const formatTime = (time = timeLeft) => {
         const hours = Math.floor(time / 3600);
         const minutes = Math.floor((time % 3600) / 60);
@@ -80,7 +89,7 @@ export const Quiz: React.FC = () => {
                         <div className="divide-y divide-gray-300/50">
                             <div className="space-y-6 py-8 text-base leading-7 text-gray-600">
                                 <p>
-                                    <span className={'bold italic'}>{quizData.title} </span>
+                                    <span className={'bold italic'}>{quizData?.questions[currentQuestionIndex].question}</span>
                                 </p>
                                 <div className="space-y-4">
                                     {currentQuestion.answers.map((answer, index) => (
@@ -120,7 +129,7 @@ export const Quiz: React.FC = () => {
                                             </svg>
                                         </PopoverTrigger>
                                         <PopoverContent>
-                                                <p>{currentQuestion.hint}</p>
+                                            <p>{currentQuestion.hint}</p>
                                         </PopoverContent>
                                     </Popover>
                                     <button
