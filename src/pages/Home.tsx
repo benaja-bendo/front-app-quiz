@@ -20,6 +20,17 @@ import HttpService from "@/services/HttpService";
 import {ResponseT, TQuiz} from "@/types/TQuiz.ts";
 import "@/pages/Home.scss"
 import {Link} from "react-router-dom";
+import "@/css/veille.scss";
+
+
+
+type Tveille = {
+    title: string,
+    content: string,
+    url: string,
+    link: string
+    date: string
+}
 
 export const Home: React.FC = () => {
 
@@ -34,10 +45,19 @@ export const Home: React.FC = () => {
         "Capitales mondiales",
         ">"
     ];
+    const filtersVeille = [
+        "Tous sites",
+        "news-google",
+        "frandroid",
+        "tech2tech",
+    ];
     const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
     const [selectedFilter2, setSelectedFilter2] = useState<string | null>(null);
+    const [dataveille, setDataveille] = useState<Tveille[]>([])
+    const [loadingVeille, setLoadingVeille] = useState<boolean>(false)
+    const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-
+    console.log(selectedFilters)
     const handleClick = (index: number) => {
         setSelectedFilter(String(index));
     };
@@ -58,9 +78,28 @@ export const Home: React.FC = () => {
         setQuizzes(data.data)
     }
 
+    const getveille = async () => {
+
+        setLoadingVeille(true)
+        const {data} = await HttpService.get<ResponseT<Tveille[]>>("/veille")
+        setDataveille(data.data)
+        setLoadingVeille(false)
+        console.log(data.data)
+    }
+
+    const handleClickFiltreVeille = (index: number) => {
+        const filter = String(index);
+        setSelectedFilters(prev => {
+            if (prev.includes(filter)) {
+                return prev.filter(f => f !== filter);
+            } else {
+                return [...prev, filter];
+            }
+        });
+    };
 
     return (<>
-        <div>
+        <div className={'pb-24'}>
             <div className="header">
                 <div className="desktop-only">
                     <img src={Photo} alt="Logo-app"/>
@@ -113,7 +152,48 @@ export const Home: React.FC = () => {
                     ))}
                 </div>
             </div>
+
+            <hr className="border-t-2 border-gray-200"/>
+            <div>
+                <div className="items-center mb-4">
+                    <div className="quiz py-5">
+                        <h2 className="text-2xl font-semibold">Veille Techno</h2>
+                        <img src={Rod} alt="rod" style={{margin: "30px 30px 30px 30px"}}/>
+                        <div className="all-filters">
+                            {
+                                filtersVeille.map((filter2, index) => (
+                                    <button
+                                        key={index}
+                                        className={`filters ${selectedFilters.includes(String(index)) ? "selected" : ""}`}
+                                        onClick={() => handleClickFiltreVeille(index)}
+                                    >
+                                        {filter2}
+                                    </button>
+                                ))
+                            }
+                        </div>
+                        <Button
+                            onClick={getveille}
+                            variant="destructive">
+                            {loadingVeille ? "Chargement..." : "Lancer une veille techno"}
+                        </Button>
+                        <div className="max-w-4xl mx-auto">
+                        {
+                            dataveille.map((veille, index) => (
+                                <div key={index} className="veille veille bg-white rounded-lg shadow-lg overflow-hidden p-6">
+                                    <h3>{veille.title}</h3>
+                                    <div dangerouslySetInnerHTML={{ __html: veille.content }} />
+                                    <FiabilityGauge percentage={Math.floor(Math.random() * 100)} />
+                                </div>
+                            ))
+                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
         <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-2xl">
             <div className="container mx-auto p-4">
                 <div className="flex gap-2 justify-end items-center">
@@ -173,3 +253,20 @@ export const Home: React.FC = () => {
         </div>
     </>);
 }
+
+const FiabilityGauge: React.FC<{ percentage: number }> = ({ percentage }) => {
+    return (
+        <div style={{ width: '100%', backgroundColor: '#e0e0e0', borderRadius: '5px' }}>
+            <div style={{
+                height: '20px',
+                width: `${percentage}%`,
+                backgroundColor: percentage > 50 ? '#4caf50' : '#ff9800',
+                borderRadius: '5px',
+                textAlign: 'right',
+                transition: 'width 0.3s ease-in-out'
+            }}>
+                <span style={{ padding: '0 5px', color: 'white' }}>Fiable à {percentage}%</span>
+            </div>
+        </div>
+    );
+};
