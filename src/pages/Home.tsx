@@ -180,7 +180,7 @@ export const Home: React.FC = () => {
                         <div className="max-w-4xl mx-auto">
                         {
                             dataveille.map((veille, index) => (
-                                <div key={index} className="veille veille bg-white rounded-lg shadow-lg overflow-hidden p-6">
+                                <div key={index} className="veille veille bg-white rounded-lg shadow-lg overflow-hidden p-6 mb-4">
                                     <h3>{veille.title}</h3>
                                     <div dangerouslySetInnerHTML={{ __html: veille.content }} />
                                     <FiabilityGauge percentage={Math.floor(Math.random() * 100)} />
